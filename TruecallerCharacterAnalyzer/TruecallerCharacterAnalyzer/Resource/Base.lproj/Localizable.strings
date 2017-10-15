@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  TruecallerCharacterAnalyzer
+
+  Created by Alican Karayelli on 15.10.2017.
+  Copyright © 2017 Alican Karayelli. All rights reserved.
+*/
+
+"ERROR"                     = "Error";
+"SUCCESS"                   = "Success";
+"INFO"                      = "Info";
+"ProgramaticError"          = "Programatical error occured!";
+"NetworkErrorInvalidData"   = "Data from source is invalid!";
+"NetworkProblem"            = "There is a problem about network. Please try later again";
+"ContentNotSufficient"      = "Content characters not long enough!";
+
