@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var xthCharacterTw: UITextView!
     @IBOutlet weak var everyXthCharacterTw: UITextView!
     @IBOutlet weak var wordCounterTw: UITextView!
+    @IBOutlet var processLogTw: UITextView!
     
     @IBOutlet weak var everyXthCharacterAI: UIActivityIndicatorView!
     @IBOutlet weak var xthCharacterAI: UIActivityIndicatorView!
@@ -24,35 +25,50 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.clearContent()
     }
-    
-    
-    
     
     @IBAction func analyzeBtnAction(_ sender: UIButton) {
         
+        guard isAllJobsDone() == true else {
+            print("There is at least a job that not process request result...")
+            self.addProcessLog(logRecord: "analyzeButton: Please wait until all jobs are finished!")
+            return
+        }
+        
+        self.clearContent()
         self.startAllActivityIndicators()
         
+
+        // Finds Xth character for given website
         xthCharacterAnalyzer.analyze { (model, error) in
+            // model as XthCharacterModel
+            
             DispatchQueue.main.async(execute: {
+                
+                self.xthCharacterAI.stopAnimating()
+
                 guard error == nil else{
-                    let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: error, preferredStyle: .actionSheet)
-                    self.present(alert, animated: false, completion: nil)
+                    self.addProcessLog(logRecord: "xthCharacterAnalyzer: " + error!)
                     return
                 }
                 
                 let xthCharacterModel = (model as! XthCharacterModel)
                 self.xthCharacterTw.text = xthCharacterModel.xthCharacter.description
-                self.xthCharacterAI.stopAnimating()
+                self.addProcessLog(logRecord: "xthCharacterAnalyzer: Listed above!" )
             })
         }
         
-        
+        // Finds every Xth character for given website
         everyXthCharacterAnalyzer.analyze { (model, error) in
+            // model as EveryXthCharacterModel
+        
             DispatchQueue.main.async(execute: {
+                
+                self.everyXthCharacterAI.stopAnimating()
+
                 guard error == nil else{
-                    let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: error, preferredStyle: .actionSheet)
-                    self.present(alert, animated: false, completion: nil)
+                    self.addProcessLog(logRecord: "everyXthCharacterAnalyzer: " + error!)
                     return
                 }
                 
@@ -65,36 +81,76 @@ class ViewController: UIViewController {
                 )
                 
                 self.everyXthCharacterTw.text = stringRepresentation
-                self.everyXthCharacterAI.stopAnimating()
+                self.addProcessLog(logRecord: "everyXthCharacterAnalyzer: Listed above!" )
+
             })
         }
-        
-        
-        
+
+        //Finds words for given website and retuns count
         wordCountAnalyzer.analyze { (model, error) in
+            // model as WordCounterModel
+
             DispatchQueue.main.async(execute: {
+                
+                self.wordCounterAI.stopAnimating()
+
                 guard error == nil else{
-                    let alert = UIAlertController(title: NSLocalizedString("ERROR", comment: ""), message: error, preferredStyle: .actionSheet)
-                    self.present(alert, animated: false, completion: nil)
+                    self.addProcessLog(logRecord: "wordCountAnalyzer: " + error!)
                     return
                 }
                 
                 let wordCounterModel = (model as! WordCounterModel)
-                
                 let stringRepresentation = wordCounterModel.wordList.map { $0 + ":" + String($1) }.joined(separator: "\n*******\n")
-                
                 self.wordCounterTw.text = stringRepresentation
-                self.wordCounterAI.stopAnimating()
+                self.addProcessLog(logRecord: "wordCountAnalyzer: Listed above!" )
             })
         }
         
     }
     
+    /**
+     Starts all activity indicator on UI for simultanious requests
+     - Returns: Void
+     */
     private func startAllActivityIndicators(){
         xthCharacterAI.startAnimating()
         everyXthCharacterAI.startAnimating()
         wordCounterAI.startAnimating()
     }
+    
+    
+    /**
+     Clears textview inputs
+     - Returns: Void
+     */
+    private func clearContent(){
+        xthCharacterTw.text = ""
+        everyXthCharacterTw.text = ""
+        wordCounterTw.text = ""
+        processLogTw.text = ""
+    }
+    
+    /**
+     Add record to process log textview
+     
+     - parameter logRecord:String
+     
+     - Returns: Void
+     */
+    private func addProcessLog(logRecord: String){
+        processLogTw.text?.append(logRecord + "\n")
+    }
+    
+    
+    /**
+     Checks if all requests are finished
+     
+     - Returns: Bool
+     */
+    private func isAllJobsDone() -> Bool{
+        return (!xthCharacterAI.isAnimating && !everyXthCharacterAI.isAnimating && !wordCounterAI.isAnimating)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -14,21 +14,22 @@ class XthCharacter: CharacterAnalyzer {
         
         print(Constant.Log.WarningPrefix, "Will get ", Constant.Parameter.CharacterIndex, "th indexed character")
         
-        NetworkManager.sharedInstance.request { (responseType) in
+        NetworkManager.sharedInstance.request() { (responseType) in
+
 
             switch responseType{
             case .failure(let error):
-                completionHandler(nil, error.localizedDescription)
+                completionHandler(nil,  error.localizedDescription)
                 break
                 
             case .success(let source):
-                let xthCharacterModel = XthCharacterModel()
-                xthCharacterModel.pageContent = source
+                let xthCharacterModel = XthCharacterModel(pageContent: source)
                 
                 if(Constant.Parameter.CharacterIndex >= source.characters.count){
                     completionHandler(nil, NSLocalizedString("ContentNotSufficient", comment: ""))
                     
                 }else{
+                    // Converts to String.Index and finds character in given index
                     let charIndex = source.index(source.startIndex, offsetBy: Constant.Parameter.CharacterIndex)
                     xthCharacterModel.xthCharacter = source[charIndex]
                     completionHandler(xthCharacterModel, nil)
@@ -36,6 +37,7 @@ class XthCharacter: CharacterAnalyzer {
                 break
                 
             }
+            
         }     
     }
 }

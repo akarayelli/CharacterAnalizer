@@ -26,12 +26,21 @@ class NetworkManager {
     }
     
 
+    /**
+     Makes request to defined URL and gets content of URL as String. Returns source with the type of 'ResponseType'
+     
+     - parameter (ResponseType) : Callback function to return success or fail status
+     
+     - Returns: Void
+     */
     public func request(completionCallBack: @escaping (ResponseType) -> Void) {
-        let request = URLRequest(url: URL(string: self.url)!)
+        var request = URLRequest(url: URL(string: self.url)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        
         let session = URLSession.shared
         
         let task = session.dataTask(with: request) { (data, response, error) in
-            
+                        
             guard error == nil else{
                 print(Constant.Log.ErrorPrefix, "HTTP error exists!")
                 completionCallBack(ResponseType.failure(NetworkError.http))
@@ -43,7 +52,6 @@ class NetworkManager {
                 completionCallBack(ResponseType.failure(NetworkError.invalidData))
                 return
             }
-            
             
             if let remoteSiteSource = String(data: data!, encoding: .utf8) {
                 print(Constant.Log.SuccessPrefix, "Data converted to string successfully...")

@@ -13,7 +13,7 @@ class WordCounter: CharacterAnalyzer {
     func analyze(completionHandler: @escaping (BaseModel?, String?) -> Void) {
         print(Constant.Log.WarningPrefix, "Will count all words")
         
-        NetworkManager.sharedInstance.request { (responseType) in
+        NetworkManager.sharedInstance.request() { (responseType) in
             
             switch responseType{
             case .failure(let error):
@@ -21,9 +21,9 @@ class WordCounter: CharacterAnalyzer {
                 break
                 
             case .success(let source):
-                let wordCounterModel = WordCounterModel()
-                wordCounterModel.pageContent = source
+                let wordCounterModel = WordCounterModel(pageContent: source)
                 
+                // Seperates source by whitespace characters and creates dictionary that holds count of them
                 let words = source.components(separatedBy: .whitespaces)
                 var wordDictionary = [String:Int]()
                 for word in words {

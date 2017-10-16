@@ -12,4 +12,8 @@ class BaseModel {
     
     var pageContent: String!
     
+    init(pageContent: String) {
+       self.pageContent = pageContent
+    }
+    
 }
