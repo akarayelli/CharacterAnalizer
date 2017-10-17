@@ -105,14 +105,14 @@
 		0F8068BE1F92A2E600B7C082 /* TruecallerCharacterAnalyzer */ = {
 			isa = PBXGroup;
 			children = (
+				0F8068C11F92A2E600B7C082 /* ViewController.swift */,
+				0F8068E01F92A32900B7C082 /* AnalyzeType */,
+				0F8068DF1F92A30F00B7C082 /* Network */,
 				0F8068FA1F937AFD00B7C082 /* Model */,
 				0F8068EE1F936F7300B7C082 /* Enum */,
 				0F8068E31F92A3B900B7C082 /* Util */,
-				0F8068E01F92A32900B7C082 /* AnalyzeType */,
-				0F8068DF1F92A30F00B7C082 /* Network */,
 				0F8068F11F93707F00B7C082 /* Resource */,
 				0F8068BF1F92A2E600B7C082 /* AppDelegate.swift */,
-				0F8068C11F92A2E600B7C082 /* ViewController.swift */,
 				0F8068C31F92A2E600B7C082 /* Main.storyboard */,
 				0F8068C61F92A2E600B7C082 /* Assets.xcassets */,
 				0F8068C81F92A2E600B7C082 /* LaunchScreen.storyboard */,

@@ -15,14 +15,15 @@ struct Constant {
     }
     
     struct Parameter {
-        static let CharacterIndex:Int = 10
+        static let CharacterIndex:Int = 9
     }
     
     struct Log {
         static let WarningPrefix: String = "*** ⚠️ Warning: "
         static let ErrorPrefix: String = "*** 😱 Error: "
         static let SuccessPrefix: String = "*** ✅ Success: "
-        
+        static let InfoPrefix: String = "*** ℹ️ Info: "
+
     }
 }
 

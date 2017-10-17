@@ -8,8 +8,6 @@
 
 import Foundation
 
-class WordCounterModel: BaseModel{
-    
+class WordCounterModel: BaseModel{  
     var wordList: [String:Int]!
-    
 }

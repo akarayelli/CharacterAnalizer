@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum ResponseType {
     case success(String)
     case failure(Error)

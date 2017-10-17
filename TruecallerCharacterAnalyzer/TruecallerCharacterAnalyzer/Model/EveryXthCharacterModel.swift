@@ -8,9 +8,6 @@
 
 import Foundation
 
-
 class EveryXthCharacterModel: BaseModel{
-    
     var everyXthCharacterList: [Character]!
-    
 }

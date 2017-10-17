@@ -12,11 +12,10 @@ class XthCharacter: CharacterAnalyzer {
     
     func analyze(completionHandler: @escaping (BaseModel?, String?) -> Void) {
         
-        print(Constant.Log.WarningPrefix, "Will get ", Constant.Parameter.CharacterIndex, "th indexed character")
+        print(Constant.Log.InfoPrefix, "Will get ", Constant.Parameter.CharacterIndex, "th indexed character")
         
         NetworkManager.sharedInstance.request() { (responseType) in
-
-
+            
             switch responseType{
             case .failure(let error):
                 completionHandler(nil,  error.localizedDescription)
@@ -35,9 +34,7 @@ class XthCharacter: CharacterAnalyzer {
                     completionHandler(xthCharacterModel, nil)
                 }
                 break
-                
             }
-            
         }     
     }
 }

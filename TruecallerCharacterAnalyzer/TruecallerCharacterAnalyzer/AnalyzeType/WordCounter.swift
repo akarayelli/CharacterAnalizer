@@ -11,7 +11,7 @@ import Foundation
 class WordCounter: CharacterAnalyzer {
     
     func analyze(completionHandler: @escaping (BaseModel?, String?) -> Void) {
-        print(Constant.Log.WarningPrefix, "Will count all words")
+        print(Constant.Log.InfoPrefix, "Will count all words")
         
         NetworkManager.sharedInstance.request() { (responseType) in
             

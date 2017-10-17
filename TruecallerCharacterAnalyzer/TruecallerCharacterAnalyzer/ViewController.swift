@@ -10,15 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    //****** Textview Components *****
     @IBOutlet weak var xthCharacterTw: UITextView!
     @IBOutlet weak var everyXthCharacterTw: UITextView!
     @IBOutlet weak var wordCounterTw: UITextView!
     @IBOutlet var processLogTw: UITextView!
     
+    //****** Activity Indicator Components *****
     @IBOutlet weak var everyXthCharacterAI: UIActivityIndicatorView!
     @IBOutlet weak var xthCharacterAI: UIActivityIndicatorView!
     @IBOutlet weak var wordCounterAI: UIActivityIndicatorView!
     
+    //***** Analyzer type instances *****
     let xthCharacterAnalyzer: CharacterAnalyzer = XthCharacter()
     let everyXthCharacterAnalyzer: CharacterAnalyzer = EveryXthCharacter()
     let wordCountAnalyzer: CharacterAnalyzer = WordCounter()
@@ -28,10 +31,19 @@ class ViewController: UIViewController {
         self.clearContent()
     }
     
+    
+    /**
+     Processes 3 requests simultaniously and set results which provided with callback function to textviews
+     
+     - parameter sender: UIButton
+     
+     - Returns: Void
+     */
     @IBAction func analyzeBtnAction(_ sender: UIButton) {
+        print(Constant.Log.InfoPrefix + "Analyze button get fired...")
         
         guard isAllJobsDone() == true else {
-            print("There is at least a job that not process request result...")
+            print(Constant.Log.WarningPrefix + "There is at least a job that not process request result...")
             self.addProcessLog(logRecord: "analyzeButton: Please wait until all jobs are finished!")
             return
         }
@@ -39,7 +51,6 @@ class ViewController: UIViewController {
         self.clearContent()
         self.startAllActivityIndicators()
         
-
         // Finds Xth character for given website
         xthCharacterAnalyzer.analyze { (model, error) in
             // model as XthCharacterModel
@@ -155,7 +166,5 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
 }
 

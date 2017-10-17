@@ -9,8 +9,5 @@
 import Foundation
 
 class XthCharacterModel: BaseModel{
-    
     var xthCharacter: Character!
-    
-    
 }
