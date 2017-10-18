@@ -8,12 +8,16 @@
 
 import Foundation
 
-class BaseModel {
+
+protocol Presentable{
+    func stringRepresentation() -> String
+}
+
+class BaseUIModel {
     
     var pageContent: String!
     
     init(pageContent: String) {
        self.pageContent = pageContent
     }
-    
 }

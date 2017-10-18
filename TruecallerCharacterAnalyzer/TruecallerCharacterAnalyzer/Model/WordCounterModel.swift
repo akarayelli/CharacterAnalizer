@@ -8,6 +8,18 @@
 
 import Foundation
 
-class WordCounterModel: BaseModel{  
+class WordCounterUIModel: BaseUIModel, Presentable{
+    
     var wordList: [String:Int]!
+    
+    func stringRepresentation() -> String {
+        
+        let flattenedString = self.wordList.map {
+            $0 + ":" + String($1)
+            }.joined(separator: "\n*******\n")
+        
+        return flattenedString
+    }
 }
+
+

@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         // Finds Xth character for given website
         xthCharacterAnalyzer.analyze { (model, error) in
             // model as XthCharacterModel
-            
+        
             DispatchQueue.main.async(execute: {
                 
                 self.xthCharacterAI.stopAnimating()
@@ -64,8 +64,8 @@ class ViewController: UIViewController {
                     return
                 }
                 
-                let xthCharacterModel = (model as! XthCharacterModel)
-                self.xthCharacterTw.text = xthCharacterModel.xthCharacter.description
+                let xthCharacterModel = (model as! XthCharacterUIModel)
+                self.xthCharacterTw.text = xthCharacterModel.stringRepresentation()
                 self.addProcessLog(logRecord: "xthCharacterAnalyzer: Listed above!" )
             })
         }
@@ -83,15 +83,8 @@ class ViewController: UIViewController {
                     return
                 }
                 
-                let everyXthCharacterModel = (model as! EveryXthCharacterModel)
-                
-                let stringRepresentation = String(
-                    everyXthCharacterModel.everyXthCharacterList.map{
-                        String($0)
-                        }.joined(separator: "\n*******\n")
-                )
-                
-                self.everyXthCharacterTw.text = stringRepresentation
+                let everyXthCharacterModel = (model as! EveryXthCharacterUIModel)
+                self.everyXthCharacterTw.text = everyXthCharacterModel.stringRepresentation()
                 self.addProcessLog(logRecord: "everyXthCharacterAnalyzer: Listed above!" )
 
             })
@@ -110,9 +103,8 @@ class ViewController: UIViewController {
                     return
                 }
                 
-                let wordCounterModel = (model as! WordCounterModel)
-                let stringRepresentation = wordCounterModel.wordList.map { $0 + ":" + String($1) }.joined(separator: "\n*******\n")
-                self.wordCounterTw.text = stringRepresentation
+                let wordCounterModel = (model as! WordCounterUIModel)
+                self.wordCounterTw.text = wordCounterModel.stringRepresentation()
                 self.addProcessLog(logRecord: "wordCountAnalyzer: Listed above!" )
             })
         }

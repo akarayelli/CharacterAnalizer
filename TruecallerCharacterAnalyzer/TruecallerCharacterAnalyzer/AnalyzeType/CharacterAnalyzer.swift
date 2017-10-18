@@ -10,6 +10,6 @@ import Foundation
 
 protocol CharacterAnalyzer {
     
-    func analyze(completionHandler:@escaping (_ result : BaseModel?, _ error: String?) -> Void)
+    func analyze(completionHandler:@escaping (_ result : BaseUIModel?, _ error: String?) -> Void)
 
 }

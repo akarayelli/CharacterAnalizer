@@ -8,6 +8,11 @@
 
 import Foundation
 
-class XthCharacterModel: BaseModel{
+class XthCharacterUIModel: BaseUIModel, Presentable{
+    
     var xthCharacter: Character!
+    
+    func stringRepresentation() -> String {
+        return self.xthCharacter.description
+    }
 }

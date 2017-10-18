@@ -10,7 +10,7 @@ import Foundation
 
 class WordCounter: CharacterAnalyzer {
     
-    func analyze(completionHandler: @escaping (BaseModel?, String?) -> Void) {
+    func analyze(completionHandler: @escaping (BaseUIModel?, String?) -> Void) {
         print(Constant.Log.InfoPrefix, "Will count all words")
         
         NetworkManager.sharedInstance.request() { (responseType) in
@@ -21,7 +21,7 @@ class WordCounter: CharacterAnalyzer {
                 break
                 
             case .success(let source):
-                let wordCounterModel = WordCounterModel(pageContent: source)
+                let wordCounterModel = WordCounterUIModel(pageContent: source)
                 
                 // Seperates source by whitespace characters and creates dictionary that holds count of them
                 let words = source.components(separatedBy: .whitespaces)

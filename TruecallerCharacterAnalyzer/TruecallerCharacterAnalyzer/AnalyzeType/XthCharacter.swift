@@ -10,7 +10,7 @@ import Foundation
 
 class XthCharacter: CharacterAnalyzer {
     
-    func analyze(completionHandler: @escaping (BaseModel?, String?) -> Void) {
+    func analyze(completionHandler: @escaping (BaseUIModel?, String?) -> Void) {
         
         print(Constant.Log.InfoPrefix, "Will get ", Constant.Parameter.CharacterIndex, "th indexed character")
         
@@ -22,7 +22,7 @@ class XthCharacter: CharacterAnalyzer {
                 break
                 
             case .success(let source):
-                let xthCharacterModel = XthCharacterModel(pageContent: source)
+                let xthCharacterModel = XthCharacterUIModel(pageContent: source)
                 
                 if(Constant.Parameter.CharacterIndex >= source.characters.count){
                     completionHandler(nil, NSLocalizedString("ContentNotSufficient", comment: ""))

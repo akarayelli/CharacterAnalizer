@@ -12,7 +12,7 @@ import Foundation
 class EveryXthCharacter: CharacterAnalyzer {
     
     
-    func analyze(completionHandler: @escaping (BaseModel?, String?) -> Void) {
+    func analyze(completionHandler: @escaping (BaseUIModel?, String?) -> Void) {
         print(Constant.Log.InfoPrefix, "Will get every ", Constant.Parameter.CharacterIndex, "th indexed character")
         
         NetworkManager.sharedInstance.request() { (responseType) in
@@ -23,7 +23,7 @@ class EveryXthCharacter: CharacterAnalyzer {
                     break
                     
                 case .success(let source):
-                    let everyXthCharacterModel = EveryXthCharacterModel(pageContent: source)
+                    let everyXthCharacterModel = EveryXthCharacterUIModel(pageContent: source)
                     
                     if(Constant.Parameter.CharacterIndex >= source.characters.count){
                         print(Constant.Log.ErrorPrefix, "Source of website not have enough character to analiyze!")

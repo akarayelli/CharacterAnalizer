@@ -8,6 +8,18 @@
 
 import Foundation
 
-class EveryXthCharacterModel: BaseModel{
-    var everyXthCharacterList: [Character]!
+class EveryXthCharacterUIModel: BaseUIModel, Presentable{
+    
+   var everyXthCharacterList: [Character]!
+    
+    func stringRepresentation() -> String{
+        
+        let flattenedString = String(
+            self.everyXthCharacterList.map{
+                String($0)
+                }.joined(separator: "\n*******\n")
+        )
+        
+        return flattenedString
+    }
 }
